@@ -5,6 +5,19 @@
         <title>Make Cookies</title>
     </head>
     <body>
+        <h1 id="cookie-counter">0</h1>
+        <button id="cookie-clicker" type="button">Make Cookies</button>
+        <script>
+            let cookieCount = 0;
+            let clickPower = 1;
 
+            let cookieCounter = document.querySelector('#cookie-counter');
+            let cookieClicker = document.querySelector('#cookie-clicker');
+
+            cookieClicker.addEventListener("click", () => {
+                cookieCount += clickPower;
+                cookieCounter.innerHTML = cookieCount;
+            });
+        </script>
     </body>
 </html>
