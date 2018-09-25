@@ -1,4 +1,3 @@
-
 /*
     HANDLING COOKIE CLICKING
                                 */
@@ -13,11 +12,14 @@ let cookieClicker = document.querySelector('#cookie-clicker');
 cookieClicker.addEventListener("click", () => {
     updateCount(clickPower);
 });
+
 // Does math to see how much cookieCount should be incremented by
 let updateCount = (amount) => {
     cookieCount += amount;
     cookieCounter.innerHTML = cookieCount;
 }
+
+
 /*
     HANDLING POWER LEVEL STORE
                                 */
@@ -32,7 +34,7 @@ let clickPowerMultiple = document.querySelector('#click-power-multiple');
 
 // Does math to change the powerClick and updates cookieCount
 buyClickPower.addEventListener("click", () => {
-    if(cookieCount >= clickPowerPriceAmount) {
+    if (cookieCount >= clickPowerPriceAmount) {
         updateCount(-clickPowerPriceAmount);
         updatePowerClick(1);
     }
@@ -43,9 +45,98 @@ let updatePowerClick = (amount) => {
     clickPowerLevelNumber += amount;
     clickPowerLevel.innerHTML = clickPowerLevelNumber;
 
-    clickPowerPriceAmount = Math.floor(clickPowerPriceAmount * 1.33);
+    clickPowerPriceAmount = Math.floor(clickPowerPriceAmount * Math.pow(1.33, amount));
     clickPowerPrice.innerHTML = clickPowerPriceAmount;
 
     clickPower += 1;
     clickPowerMultiple.innerHTML = clickPower;
+}
+
+
+/*
+    HANDLING GRANDMA STORE
+                                */
+let grandmaPower = 50 - 10;
+let grandmaPriceAmount = 500;
+let grandmaLevelNumber = 0;
+let grandmaAuto = false;
+
+//declare DOM variables
+let buyGrandma = document.getElementById('buy-grandma');
+let grandmaPrice = document.getElementById('grandma-price');
+let grandmaLevel = document.getElementById('grandma-level');
+let grandmaMultiple = document.getElementById('grandma-multiple');
+
+buyGrandma.addEventListener("click", () => {
+    if (cookieCount >= grandmaPriceAmount) {
+        updateCount(-grandmaPriceAmount);
+        updateGrandma(1);
+    }
+})
+
+let updateGrandma = (amount) => {
+    grandmaLevelNun = grandmaLevelNumber += amount;
+    grandmaLevel.innerHTML = grandmaLevelNumber;
+
+    grandmaPriceAmount = Math.floor(grandmaPriceAmount * Math.pow(1.33, amount));
+    grandmaPrice.innerHTML = grandmaPriceAmount;
+
+    grandmaPower += 10 * amount;
+    grandmaMultiple.innerHTML = grandmaPower;
+    if (!grandmaAuto) {
+        grandmaAuto = true;
+        autoGrandmaStart();
+    }
+}
+
+let autoGrandmaStart = () => {
+    let grandmaInt = window.setInterval(() => {
+        console.log("Grandma makes: " + grandmaPower);
+        updateCount(grandmaPower);
+    }, 1000);
+}
+
+
+/*
+            FACILITIES
+                                */
+let facilityAuto = false;
+let facilityPower = 2000 - 600;
+let facilityPriceAmount = 100000;
+let facilityLevelNumber = 0;
+
+// DOM Variables
+let buyFacility = document.querySelector('#buy-facility');
+let facilityPrice = document.querySelector('#facility-price');
+let facilityLevel = document.querySelector('#facility-level');
+let facilityMultiple = document.querySelector('#facility-multiple');
+
+buyFacility.addEventListener("click", () => {
+    if (cookieCount >= facilityPriceAmount) {
+        facilityUpdate(1);
+    }
+})
+
+let facilityUpdate = (amount) => {
+
+    facilityLevelNumber += amount;
+    facilityLevel.innerHTML = facilityLevelNumber;
+
+    facilityPriceAmount += Math.floor(facilityPriceAmount * Math.pow(1.33, amount));
+    facilityPrice.innerHTML = facilityPriceAmount;
+
+    facilityPower += 600 * amount;
+    facilityMultiple.innerHTML = facilityPower;
+
+    if (!facilityAuto) {
+        facilityAuto = true;
+        autoFacilityStart();
+    }
+}
+
+let autoFacilityStart = () => {
+    let facilityInt = window.setInterval(() => {
+        console.log("Facility makes" + facilityPower);
+        updateCount(facilityPower);
+    }, 1000);
 }
