@@ -7,6 +7,14 @@
     <body>
         <h1 id="cookie-counter">0</h1>
         <button id="cookie-clicker" type="button">Make Cookies</button>
+        <hr>
+        <h2>Shop</h2>
+        <hr>
+        <p>Click Power</p>
+        <p>Produces <span id="click-power-multiple">1</span> cookie(s) per click</p>
+        <button id="buy-click-power">Buy for <span id="click-power-price">50</span></button>
+        <p>level: <span id="click-power-level">1</span></p>
+
         <script>
             let cookieCount = 0;
             let clickPower = 1;
@@ -15,9 +23,41 @@
             let cookieClicker = document.querySelector('#cookie-clicker');
 
             cookieClicker.addEventListener("click", () => {
-                cookieCount += clickPower;
-                cookieCounter.innerHTML = cookieCount;
+                updateCount(clickPower);
             });
+
+            let clickPowerPriceAmount = 50;
+            let clickPowerLevelNumber = 1;
+
+            let buyClickPower = document.querySelector('#buy-click-power');
+            let clickPowerPrice = document.querySelector('#click-power-price');
+            let clickPowerLevel = document.querySelector('#click-power-level');
+            let clickPowerMultiple = document.querySelector('#click-power-multiple');
+
+            buyClickPower.addEventListener("click", () => {
+                if(cookieCount >= clickPowerPriceAmount) {
+                    updateCount(-clickPowerPriceAmount);
+                    updatePowerClick(1);
+                }
+            })
+
+
+
+            let updateCount = (amount) => {
+                cookieCount += amount;
+                cookieCounter.innerHTML = cookieCount;
+            }
+
+            let updatePowerClick = (amount) => {
+                clickPowerLevelNumber += amount;
+                clickPowerLevel.innerHTML = clickPowerLevelNumber;
+
+                clickPowerPriceAmount = Math.floor(clickPowerPriceAmount * 1.33);
+                clickPowerPrice.innerHTML = clickPowerPriceAmount;
+
+                clickPower += 1;
+                clickPowerMultiple.innerHTML = clickPower;
+            }
         </script>
     </body>
 </html>
