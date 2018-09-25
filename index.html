@@ -15,49 +15,6 @@
         <button id="buy-click-power">Buy for <span id="click-power-price">50</span></button>
         <p>level: <span id="click-power-level">1</span></p>
 
-        <script>
-            let cookieCount = 0;
-            let clickPower = 1;
-
-            let cookieCounter = document.querySelector('#cookie-counter');
-            let cookieClicker = document.querySelector('#cookie-clicker');
-
-            cookieClicker.addEventListener("click", () => {
-                updateCount(clickPower);
-            });
-
-            let clickPowerPriceAmount = 50;
-            let clickPowerLevelNumber = 1;
-
-            let buyClickPower = document.querySelector('#buy-click-power');
-            let clickPowerPrice = document.querySelector('#click-power-price');
-            let clickPowerLevel = document.querySelector('#click-power-level');
-            let clickPowerMultiple = document.querySelector('#click-power-multiple');
-
-            buyClickPower.addEventListener("click", () => {
-                if(cookieCount >= clickPowerPriceAmount) {
-                    updateCount(-clickPowerPriceAmount);
-                    updatePowerClick(1);
-                }
-            })
-
-
-
-            let updateCount = (amount) => {
-                cookieCount += amount;
-                cookieCounter.innerHTML = cookieCount;
-            }
-
-            let updatePowerClick = (amount) => {
-                clickPowerLevelNumber += amount;
-                clickPowerLevel.innerHTML = clickPowerLevelNumber;
-
-                clickPowerPriceAmount = Math.floor(clickPowerPriceAmount * 1.33);
-                clickPowerPrice.innerHTML = clickPowerPriceAmount;
-
-                clickPower += 1;
-                clickPowerMultiple.innerHTML = clickPower;
-            }
-        </script>
+        <script src="./scripts.js"></script>
     </body>
 </html>
