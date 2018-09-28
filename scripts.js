@@ -7,6 +7,7 @@ let clickPower = 1;
 // DOM Variables
 let cookieCounter = document.querySelector('#cookie-counter');
 let cookieClicker = document.querySelector('#cookie-clicker');
+let image = document.querySelector('.cookie-image');
 
 // Updates cookieCounter on click of cookieClicker
 cookieClicker.addEventListener("click", () => {
@@ -17,6 +18,9 @@ cookieClicker.addEventListener("click", () => {
 let updateCount = (amount) => {
     cookieCount += amount;
     cookieCounter.innerHTML = cookieCount;
+    image.classList.remove("drop");
+    void image.offsetWidth;
+    image.classList.add("drop");
 }
 
 
@@ -42,7 +46,7 @@ buyClickPower.addEventListener("click", () => {
 
 // Updates the power click and changes the store listing
 let updatePowerClick = (amount) => {
-    clickPowerLevelNumber += amount;
+    clickPowerLevelNumber += amount * Math.floor(clickPowerLevelNumber * 1.05);
     clickPowerLevel.innerHTML = clickPowerLevelNumber;
 
     clickPowerPriceAmount = Math.floor(clickPowerPriceAmount * Math.pow(1.33, amount));
@@ -75,7 +79,7 @@ buyGrandma.addEventListener("click", () => {
 })
 
 let updateGrandma = (amount) => {
-    grandmaLevelNun = grandmaLevelNumber += amount;
+    grandmaLevelNumber += amount;
     grandmaLevel.innerHTML = grandmaLevelNumber;
 
     grandmaPriceAmount = Math.floor(grandmaPriceAmount * Math.pow(1.33, amount));
@@ -125,7 +129,7 @@ let facilityUpdate = (amount) => {
     facilityPriceAmount += Math.floor(facilityPriceAmount * Math.pow(1.33, amount));
     facilityPrice.innerHTML = facilityPriceAmount;
 
-    facilityPower += 600 * amount;
+    facilityPower += (600 * amount) + Math.floor(facilityLevelNumber * 1.33);
     facilityMultiple.innerHTML = facilityPower;
 
     if (!facilityAuto) {
@@ -136,7 +140,7 @@ let facilityUpdate = (amount) => {
 
 let autoFacilityStart = () => {
     let facilityInt = window.setInterval(() => {
-        console.log("Facility makes" + facilityPower);
+        console.log("Facility makes: " + facilityPower);
         updateCount(facilityPower);
     }, 1000);
 }
