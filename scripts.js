@@ -144,3 +144,46 @@ let autoFacilityStart = () => {
         updateCount(facilityPower);
     }, 1000);
 }
+
+/*
+        SWEATSHOPS
+                        */
+let sweatshopAuto = false;
+let sweatshopPower = 10000 - 1001;
+let sweatshopPriceAmount = 250000;
+let sweatshopLevelNumber = 0;
+
+let buySweatshop = document.querySelector('#buy-sweatshop');
+let sweatshopPrice = document.querySelector('#sweatshop-price');
+let sweatshopLevel = document.querySelector('#sweatshop-level');
+let sweatshopMultiple = document.querySelector('#sweatshop-multiple');
+
+buySweatshop.addEventListener("click", () => {
+    if (cookieCount >= sweatshopPriceAmount) {
+        sweatshopUpdate(1);
+    }
+})
+
+let sweatshopUpdate = (amount) => {
+
+    sweatshopLevelNumber += amount;
+    sweatshopLevel.innerHTML = sweatshopLevelNumber;
+
+    sweatshopPriceAmount += Math.floor(sweatshopPriceAmount * Math.pow(1.33, amount));
+    sweatshopPrice.innerHTML = sweatshopPriceAmount;
+
+    sweatshopPower += (1000 * amount) + Math.floor(sweatshopLevelNumber * 1.33);
+    sweatshopMultiple.innerHTML = sweatshopPower;
+
+    if (!sweatshopAuto) {
+        sweatshopAuto = true;
+        autoSweatshopStart();
+    }
+}
+
+let autoSweatshopStart = () => {
+    let sweatshopInt = window.setInterval(() => {
+        console.log("Sweatshop makes: " + sweatshopPower);
+        updateCount(sweatshopPower);
+    }, 1000);
+}
